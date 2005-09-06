@@ -9,10 +9,11 @@ def console():
 Python E17 tunner script (tm) * 
 1 ) E17 modules
 2 ) Desktop names
-3 ) Border Shade
+3 ) Border shade options
 4 ) Languages
-5 ) Winlist Settings (alt+tab)
+5 ) Winlist settings (alt+tab)
 6 ) E17 cache (font and image)
+7 ) Windows kill options
 0 ) Exit
 """
 		rsp = raw_input ("Option: ")
@@ -28,6 +29,8 @@ Python E17 tunner script (tm) *
 			e17_winlist()
 		elif rsp=="6":
 			e17_cache()
+		elif rsp=="7":
+			e17_kill()
 		elif rsp =="0":
 			print "Thanks for using E17 tunner. You're now a rice boy.. ;)\n"
 			sys.exit()
@@ -402,5 +405,81 @@ def e17_cache():
 	except KeyboardInterrupt:
 		print "\nOops! exiting ;)"
 		console()
+
+
+
+def e17_kill():
+	try:
+		import pyetun_kill
+		possible=pyetun_kill.get_kill_close_not_possible()
+		kill=pyetun_kill.get_kill_process()
+		timer=pyetun_kill.get_kill_timer_wait()
+
+		print "E17 Windows kill Options:"
+		
+		if possible=="KILL=1":
+			print "Kill when close window is not possible: ENABLED (1)"
+		else:
+			print "Kill when close window is not possible: DISABLED (0)"
+		
+		if kill=="KILL=1":
+			print "Kill process via E: ENABLED (1)"
+		else:
+			print "Kill process via E : DISABLED (0) (via X Window System)"
+		
+		print "Interval to wait before killing client: ",timer, "sec"
+
+		print "> Options: "
+		print bold("[k]ill when close not possible <0/1>") 
+		print bold("[e]nlightenment kill process <0/1>")
+		print bold("[s]et interval before killing <value in seconds>")
+		print "> CTRL+C - Main Menu"
+		valu=raw_input("Option: ")
+		while 1:
+			try:
+				t=valu.split(" ")
+				opt=t[0]
+				value=t[1]
+			except IndexError:
+				print "[error]: m00, wrong wrong wrong! ;-)"
+				e17_winlist()
+			
+			value=float(value)
+			
+			if opt=="k":
+				
+				if value>=0 and value<=1:
+					pyetun_kill.set_kill_close_not_possible(value)
+					print bold("Done!")
+					e17_kill()
+				else:
+					print bold("[error]: Value between 0 and 1")
+					e17_kill()
+			
+			elif opt=="e":
+				if value>=0 and value<=1:
+					pyetun_kill.set_kill_process(value)
+					print bold("Done!")
+					e17_kill()
+			
+				else:
+					print bold("[error]: Value between 0 and 1")
+					e17_winlist()
+
+
+			elif opt=="s":
+				pyetun_kill.set_kill_timer_wait(value)
+				print bold("Done!")
+				e17_kill()
+
+			else:
+				print bold("[error] m000 wrong option!")
+				e17_kill()
+			
+
+	except KeyboardInterrupt:
+		print "\nOops! exiting ;)"
+		console()
+
 console()
 	
