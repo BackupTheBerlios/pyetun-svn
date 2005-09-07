@@ -14,6 +14,7 @@ Python E17 tunner script (tm) *
 5 ) Winlist settings (alt+tab)
 6 ) E17 cache (font and image)
 7 ) Windows kill options
+8 ) Keybindings 
 0 ) Exit
 """
 		rsp = raw_input ("Option: ")
@@ -31,6 +32,8 @@ Python E17 tunner script (tm) *
 			e17_cache()
 		elif rsp=="7":
 			e17_kill()
+		elif rsp=="8":
+			e17_keys()
 		elif rsp =="0":
 			print "Thanks for using E17 tunner. You're now a rice boy.. ;)\n"
 			sys.exit()
@@ -480,6 +483,68 @@ def e17_kill():
 	except KeyboardInterrupt:
 		print "\nOops! exiting ;)"
 		console()
+
+def e17_keys():
+	try:
+		import pyetun_keys
+		keys=pyetun_keys.get_KEYS()
+		mod=pyetun_keys.get_MODIFIERS()
+		action=pyetun_keys.get_ACTION()
+		par=pyetun_keys.get_PARAMS()
+		
+		
+		for index,i in enumerate(keys):
+			print bold("[MODIFIER+KEY] "),
+			print mod[index],"+",i,
+			print bold(" [ACTION] "),
+			print action[index],
+			print bold(" [ACTION PARAMS] "),
+			print par[index][:-1]
+
+		print "> Options: "
+		print bold("[a]dd keybinding  <modifier+key> <action> <action_params>") 
+		print bold("[d]elete keybinding <modifier+key> <action> <action_params>")
+		print "EXAMPLE: a ALT+g exec gedit * This example creates a shortcut key (ALT+g) to open gedit *"
+
+		print "> CTRL+C - Main Menu"
+		valu=raw_input("Option: ")
+		while 1:
+			try:
+				t=valu.split(" ")
+				opt=t[0]
+				key=t[1]
+				key_final=key.split("+")[1]
+				mod=key.split("+")[0]
+				action=t[2]
+				param=t[3]
+
+			except IndexError:
+				print "[error]: m00, wrong wrong wrong! ;-)"
+				e17_keys()
+			
+			
+			
+			if opt=="a":
+				pyetun_keys.add_key(key_final,mod,action,param)
+				print bold("KEY:"),
+				print mod,"+",key, "ADDED!"
+
+				e17_keys()
+
+			elif opt=="d":
+				pyetun_keys.del_key(key_final,mod,action,param)
+				print bold("KEY:"),
+				print mod,"+",key, "DELETED!"
+				e17_keys()
+			
+			else:
+				print bold("[error] m000 wrong option!")
+				e17_keys()
+
+	except KeyboardInterrupt:
+		print "\nOops! exiting ;)"
+		console()
+
 
 console()
 	
