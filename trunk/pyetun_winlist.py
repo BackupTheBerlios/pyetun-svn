@@ -1,5 +1,5 @@
-import os, sys
-e_remote_path="enlightenment_remote"
+import os, sys, pyetun_cfg
+e_remote_path=pyetun_cfg.return_remote()
 
 #define if alt-tab show others desktops
 def get_list_other_desktops():

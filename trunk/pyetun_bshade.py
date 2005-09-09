@@ -1,5 +1,5 @@
-import os, sys
-e_remote_path="/usr/bin/enlightenment_remote"
+import os, sys, pyetun_cfg
+e_remote_path=pyetun_cfg.return_remote()
 
 def get_bshade():
 	

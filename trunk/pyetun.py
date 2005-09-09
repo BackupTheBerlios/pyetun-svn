@@ -2,6 +2,9 @@
 import os, sys
 
 
+# Config file Object return
+
+
 
 def console():
 	try:
@@ -52,8 +55,8 @@ def e17_modules():
 	try:
 		
 		import pyetun_mod
-		e_remote_path="/usr/bin/enlightenment_remote"
-
+		
+		
 		modules=pyetun_mod.build_modules_status()
 		#let's list all modules  and status..
 		for i in modules:
@@ -96,7 +99,7 @@ def e17_modules():
 							return e17_modules()
 	
 						if modules[mod] == "-1" :
-							os.popen(e_remote_path+" -module-load "+mod)
+							load_mod(mod)
 							print bold("[M ] "+mod+" loaded!")
 							return e17_modules()
 					
@@ -106,7 +109,7 @@ def e17_modules():
 							return e17_modules()
 	
 						if modules[mod] == "1" or modules[mod] == "0" :
-							os.popen(e_remote_path+" -module-unload "+mod)
+							unload_mod(mod)
 							print bold("[M ] "+mod+" unloaded!")
 							return e17_modules()
 					
@@ -116,13 +119,14 @@ def e17_modules():
 							return e17_modules()
 	
 						if modules[mod] == "-1":
-							os.popen(e_remote_path+" -module-load "+mod)
-							os.popen(e_remote_path+" -module-enable "+mod)
+							load_mod(mod)
+							enable_mod(mod)
 							print bold("[M ] "+mod+" loaded and enabled!")
 							return e17_modules()
 	
 						if modules[mod] == "0" :
-							os.popen(e_remote_path+" -module-enable "+mod)
+							enable_mod(mod)
+							
 							print bold("[M ] "+mod+" enabled!")
 							return e17_modules()
 		
@@ -132,7 +136,7 @@ def e17_modules():
 							return e17_modules()
 	
 						if modules[mod] == "1":
-							os.popen(e_remote_path+" -module-disable "+mod)
+							disable_mod(mod)
 							print bold("[M ] "+mod+" disabled!")
 							return e17_modules()
 					

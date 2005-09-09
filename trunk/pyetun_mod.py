@@ -1,11 +1,9 @@
-import os, sys
+import os, sys, pyetun_cfg
 
 
-extra_modules_path="/usr/lib/enlightenment/modules_extra"
-extra_modules_path_local="/usr/local/lib/enlightenment/modules_extra"
-modules_path="/usr/lib/enlightenment/modules"
-modules_path_local="/usr/local/lib/enlightenment/modules"
-e_remote_path="enlightenment_remote"
+
+
+e_remote_path=pyetun_cfg.return_remote()
 
 # check modules (enabled and disabled one) status
 def all_loaded_modules():
@@ -25,12 +23,11 @@ def all_loaded_modules():
 		
 
 def locate_extra_modules():
-	if os.path.exists(extra_modules_path):
-		extra=os.listdir(extra_modules_path)
-		
-	elif os.path.exists(extra_modules_path_local):
-		extra=os.listdir(extra_modules_path_local)
+	extra=pyetun_cfg.return_modpath("extra")
 	
+	if os.path.exists(extra):
+		extra=os.listdir(extra)
+		
 		
 	else:
 		print "[E] Can't find extra modules path for E17. To continue.."
@@ -40,11 +37,9 @@ def locate_extra_modules():
 	return extra
 
 def locate_normal_modules():
+	modules_path=pyetun_cfg.return_modpath("normal")
 	if os.path.exists(modules_path):
 		normal=os.listdir(modules_path)
-		
-	elif os.path.exists(modules_path_local):
-		normal=os.listdir(modules_path_local)
 	
 		
 	else:
@@ -71,3 +66,19 @@ def build_modules_status():
 
 	return mod_all_status
 	
+
+def load_mod(mod):
+	os.popen(e_remote_path+" -module-load "+mod)
+
+def unload_mod(mod):
+	os.popen(e_remote_path+" -module-unload "+mod)
+
+def enable_mod(mod):
+	os.popen(e_remote_path+" -module-enable "+mod)
+
+def disable_mod(mod):
+	os.popen(e_remote_path+" -module-disable "+mod)
+
+
+
+
