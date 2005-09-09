@@ -533,14 +533,15 @@ def e17_keys():
 		valu=raw_input("Option: ")
 		while 1:
 			try:
-				t=valu.split(" ")
-				opt=t[0]
-				key=t[1]
+				opt, key, action, param=valu.split(None,3)
+				
+				#opt=t[0]
+				#key=t[1]
 				key_final=key.split("+")[1]
 				mod=key.split("+")[0]
-				action=t[2]
-				param=t[3]
-
+				#action=t[2]
+				#param=t[3]
+				
 			except IndexError:
 				print "[error]: m00, wrong wrong wrong! ;-)"
 				e17_keys()
