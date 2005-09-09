@@ -312,6 +312,9 @@ def e17_winlist():
 		import pyetun_winlist
 		other=pyetun_winlist.get_list_other_desktops()
 		icon=pyetun_winlist.get_show_iconified_windows()
+		jump=pyetun_winlist.get_jump_desk()
+		
+
 		print "Alt-tab Settings:"
 		if other[0]=="POLICY=1":
 			print "List other desktops windows: ENABLED (1)"
@@ -323,9 +326,20 @@ def e17_winlist():
 		elif icon[0]=="POLICY=0":
 			print "Show iconified windows: FALSE (0)"
 		
+
+		if jump[0]=="POLICY=1":
+			print "Jump to desktops while selecting: TRUE (1)"
+			
+		elif jump[0]=="POLICY=0":
+			print "Jump to desktops while selecting: FALSE (0)"
+			if other[0]=="POLICY=0":
+				print bold(" |> NOTE:"),
+				print "You need ENABLE [l]ist other desktop windows to use this option.."
+
 		print "> Options: "
 		print bold("[l]ist other desktop windows <0 or 1>")
 		print bold("[s]how iconified windows <0 or 1>")
+		print bold("[j]ump to desktops while selecting <0 or 1>")
 		print "> CTRL+C - Main Menu"
 	
 		valu=raw_input("Option: ")
@@ -356,6 +370,11 @@ def e17_winlist():
 					print bold("Done!")
 					e17_winlist()
 			
+			elif opt=="j":
+				if value>=0 and value<=1:
+					pyetun_winlist.set_jump_desk(value)
+					print bold("Done!")
+					e17_winlist()
 				else:
 					print bold("[error]: Value between 0 and 1")
 					e17_winlist()

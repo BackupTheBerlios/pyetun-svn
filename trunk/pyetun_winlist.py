@@ -25,3 +25,15 @@ def get_show_iconified_windows():
 def set_show_iconified_windows(value):
 	value=str(value)
 	os.popen(e_remote_path+" -winlist-list-show-iconified-set "+value)
+
+#Jump when alt-tab to other desktops? :D
+def get_jump_desk():
+	other=os.popen(e_remote_path+" -winlist-list-jump-desk-while-selecting-get").readlines()
+	del other[0]
+	other=other[:-1]
+	other[0]=other[0].split(" ")[1][:-1]
+	return other
+
+def set_jump_desk(value):
+	value=str(value)
+	os.popen(e_remote_path+" -winlist-list-jump-desk-while-selecting-set "+value)
