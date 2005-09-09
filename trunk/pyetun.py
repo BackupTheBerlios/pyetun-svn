@@ -164,18 +164,15 @@ def e17_name_desktop():
 			print bold(">"), des_names[i]
 
 		print "> Options: "
-		print bold("[a]dd <desk_name> <desk_x> <desk_y>") 
-		print bold("[d]elete <desk_name> <desk_x> <desk_y>")
+		print bold("[a]dd <desk_x> <desk_y> <desk_name> ") 
+		print bold("[d]elete <desk_x> <desk_y> <desk_name>")
 		print "> CTRL+C - Main Menu"
 		
 		value=raw_input("Option: ")
 		while 1:
 			try:
-				t=value.split(" ")
-				opt=t[0]
-				name=t[1]
-				x=t[2]
-				y=t[3]
+				opt, x, y, name = value.split(None,3)
+				
 			except IndexError:
 				print "[error]: m00, wrong wrong wrong! ;-)"
 				return e17_name_desktop()
