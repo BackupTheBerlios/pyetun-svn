@@ -18,6 +18,7 @@ Python E17 tunner script (tm) *
 6 ) E17 cache (font and image)
 7 ) Windows kill options
 8 ) Keybindings 
+9 ) Windows Focus Settings
 0 ) Exit
 """
 		rsp = raw_input ("Option: ")
@@ -37,6 +38,9 @@ Python E17 tunner script (tm) *
 			e17_kill()
 		elif rsp=="8":
 			e17_keys()
+		elif rsp=="9":
+			e17_focus()
+			
 		elif rsp =="0":
 			print "Thanks for using E17 tunner. You're now a rice boy.. ;)\n"
 			sys.exit()
@@ -46,9 +50,22 @@ Python E17 tunner script (tm) *
 		sys.exit()
 
 def bold(s): 
-	return "\033[1m%s\033[0m" % s
+	return "\033[1m%s\033[0m" %s
 
+def bold_green(s):
+	return "\033[1;32m%s\033[0m" %s
 
+def green(s):
+	return "\033[0;32m%s\033[0m" %s
+
+def bold_red(s):
+	return "\033[1;31m%s\033[0m" %s
+
+def bold_yellow(s):
+	return "\033[1;33m%s\033[0m" %s
+
+#def error(s):
+#	return "\033[1;32;40m %s" %s
 
 #handle with e17 modules
 def e17_modules():
@@ -59,22 +76,26 @@ def e17_modules():
 		
 		modules=pyetun_mod.build_modules_status()
 		#let's list all modules  and status..
+		print "> Available modules:"
 		for i in modules:
-			if modules[i] == "1":	
-				print i,
+			if modules[i] == "1":
+				
+				print bold_yellow("=> "),i,
 				print " [ status: enabled,loaded ]"
 			elif modules[i] == "0":
-				print i,
+				
+				print bold_yellow("=> ") ,i,
 				print " [ status: disabled,loaded ]"
 			elif modules[i] == "-1":
-				print i,
+				
+				print bold_yellow("=> ") ,i,
 				print "[ status: disabled,unloaded ]"
 		
-		print "> Options: "
-		print bold("[e]nable <module_name>") 
-		print bold("[d]isable <module_name>")
-		print bold("[l]oad <module_name>")
-		print bold("[u]nload <module_name>")
+		print bold_red("> Options: ")
+		print bold_green("[E]NABLE <module name>") 
+		print bold_green("[D]ISABLE <module name>")
+		print bold_green("[L]OAD <module name>")
+		print bold_green("[U]NLOAD <module name>")
 		print "> CTRL+C - Main Menu"
 	
 		value=raw_input("Option: ")
@@ -88,7 +109,7 @@ def e17_modules():
 					x=value.split(" ")
 					let=x[0]
 					mod=x[1]
-				except IndexError:
+				except ValueError,IndexError:
 					print "[error]: m00, wrong wrong wrong! ;-)"
 					return e17_modules()
 	
@@ -158,14 +179,17 @@ def e17_name_desktop():
 		import pyetun_desk
 		des_names=pyetun_desk.check_desktop_names()
 		#let's print modules names..
-		print "Desktop names list: "
+		print "> Desktop names list: "
 		for i in des_names:
-			print bold("* desk_name:"),i,
+			
+			print bold_yellow("=> "),
+			print "Desktop name:",
+			print bold(i),
 			print bold(">"), des_names[i]
 
-		print "> Options: "
-		print bold("[a]dd <desk_x> <desk_y> <desk_name> ") 
-		print bold("[d]elete <desk_x> <desk_y> <desk_name>")
+		print bold_red("> Options: ")
+		print bold_green("[A]DD <DESK_X> <DESK_Y> <Desktop name> ") 
+		print bold_green("[D]ELETE <DESK_X> <DESK_Y> <Desktop name>")
 		print "> CTRL+C - Main Menu"
 		
 		value=raw_input("Option: ")
@@ -173,7 +197,7 @@ def e17_name_desktop():
 			try:
 				opt, x, y, name = value.split(None,3)
 				
-			except IndexError:
+			except ValueError, IndexError:
 				print "[error]: m00, wrong wrong wrong! ;-)"
 				return e17_name_desktop()
 			
@@ -201,28 +225,31 @@ def e17_name_desktop():
 def e17_bshade():
 	import pyetun_bshade
 	try:
-		print "Border Shade Options:"
-		print bold("* "),
+		print "> Border Shade Options:"
+		
 		# border shade animate
 		if pyetun_bshade.get_bshade() == "1":
+			
+			print bold_yellow("=> "),
 			print "Border shade animation - ENABLED (1)"
 		elif pyetun_bshade.get_bshade() == "0":
+			print bold_yellow("=> "),
 			print "Border shade animation - DISABLED (0)"
 		#border shade transition
-		print bold("* "),
+		print bold_yellow("=> "),
 		print "Shading animation algorithm -",
 		print pyetun_bshade.get_trans_alg()
 		#shading speed (pixels/sec)
-		print bold("* "),
+		print bold_yellow("=> "),
 		print "Shading Speed -",
 		print pyetun_bshade.get_shade_speed(),
 		print "pixels/sec"
 		
 		#Options
-		print "> Options: "
-		print bold("[b]order shade animation <0/1>") 
-		print bold("[a]nimation algorithm <value between 0 and 3>")
-		print bold("[s]hading speed <value>")
+		print bold_red("> Options: ")
+		print bold_green("[B]ORDER SHADE ANIMATION <0/1>") 
+		print bold_green("[A]NIMATION ALGORITHM <value between 0 and 3>")
+		print bold_green("[S]HADING SPEED <value>")
 		print "> CTRL+C - Main Menu"
 		
 		valu=raw_input("Option: ")
@@ -231,7 +258,7 @@ def e17_bshade():
 				t=valu.split(" ")
 				opt=t[0]
 				value=t[1]
-			except IndexError:
+			except ValueError,IndexError:
 				print "[error]: m00, wrong wrong wrong! ;-)"
 				e17_bshade()
 
@@ -261,10 +288,12 @@ def e17_languages():
 		import pyetun_lang
 		all=pyetun_lang.get_lang_list()
 		current=pyetun_lang.current_lang()
-		print "Available Languagues: "
+		print "> Available Languagues: "
 		for i in all:
-			print bold("* "),
+			print bold_yellow("=> "),
 			print i
+		
+		print bold_yellow("=> "),
 		print "Current System Language: ",
 		if current=='""':
 			print "None (Default)"
@@ -272,8 +301,8 @@ def e17_languages():
 			current=current.split('"')[1]
 			print current
 		
-		print "> Options: "
-		print bold("[s]et language <lang_name>")
+		print bold_red("> Options: ")
+		print bold_green("[S]ET LANGUAGE <language name>")
 		print "> CTRL+C - Main Menu"
 	
 		valu=raw_input("Option: ")
@@ -282,7 +311,7 @@ def e17_languages():
 				t=valu.split(" ")
 				opt=t[0]
 				value=t[1]
-			except IndexError:
+			except ValueError,IndexError:
 				print "[error]: m00, wrong wrong wrong! ;-)"
 				e17_languages()
 
@@ -312,31 +341,37 @@ def e17_winlist():
 		jump=pyetun_winlist.get_jump_desk()
 		
 
-		print "Alt-tab Settings:"
+		print "> Alt-tab Settings:"
 		if other[0]=="POLICY=1":
+			print bold_yellow("=> "),
 			print "List other desktops windows: ENABLED (1)"
 		elif other[0]=="POLICY=0":
+			print bold_yellow("=> "),
 		  	print "List other desktops windows: DISABLED (0)"
 		 
 		if icon[0]=="POLICY=1":
+			print bold_yellow("=> "),
 			print "Show iconified windows: TRUE (1)"
 		elif icon[0]=="POLICY=0":
+			print bold_yellow("=> "),
 			print "Show iconified windows: FALSE (0)"
 		
 
 		if jump[0]=="POLICY=1":
+			print bold_yellow("=> "),
 			print "Jump to desktops while selecting: TRUE (1)"
 			
 		elif jump[0]=="POLICY=0":
+			print bold_yellow("=> "),
 			print "Jump to desktops while selecting: FALSE (0)"
 			if other[0]=="POLICY=0":
-				print bold(" |> NOTE:"),
-				print "You need ENABLE [l]ist other desktop windows to use this option.."
+				print bold("  NOTE:"),
+				print "You need ENABLE [L]IST OTHER DESKTOPS WINDOWS to use this option.."
 
-		print "> Options: "
-		print bold("[l]ist other desktop windows <0 or 1>")
-		print bold("[s]how iconified windows <0 or 1>")
-		print bold("[j]ump to desktops while selecting <0 or 1>")
+		print bold_red("> Options: ")
+		print bold_green("[L]IST OTHER DESKTOPS WINDOWS <0 or 1>")
+		print bold_green("[S]SHOW ICONIFIED WINDOWS <0 or 1>")
+		print bold_green("[J]UMP TO DESKTOPS WHILE SELECTING <0 or 1>")
 		print "> CTRL+C - Main Menu"
 	
 		valu=raw_input("Option: ")
@@ -345,7 +380,7 @@ def e17_winlist():
 				t=valu.split(" ")
 				opt=t[0]
 				value=t[1]
-			except IndexError:
+			except ValueError,IndexError:
 				print "[error]: m00, wrong wrong wrong! ;-)"
 				e17_winlist()
 			
@@ -391,13 +426,15 @@ def e17_cache():
 		import pyetun_cache
 		font=pyetun_cache.get_font_cache()
 		img=pyetun_cache.get_image_cache()
-		print "Cache values:"
+		print "> Cache values:"
+		print bold_yellow("=> "),
 		print "Font: ",font[0],"Kb  [default: 512Kb]"
+		print bold_yellow("=> "),
 		print "Image:",img[0], "Kb  [default: 4096Kb]"
 		
-		print "> Options: "
-		print bold("[f]ont size cache <Kb>")
-		print bold("[i]mage size cache <Kb>")
+		print bold_red("> Options: ")
+		print bold_green("[F]ONT SIZE CACHE <Kb>")
+		print bold_green("[I]MAGE SIZE CACHE <Kb>")
 		
 		print "> CTRL+C - Main Menu"
 	
@@ -407,7 +444,7 @@ def e17_cache():
 				t=valu.split(" ")
 				opt=t[0]
 				value=t[1]
-			except IndexError:
+			except ValueError,IndexError:
 				print "[error]: m00, wrong wrong wrong! ;-)"
 				e17_cache()
 			
@@ -438,24 +475,28 @@ def e17_kill():
 		kill=pyetun_kill.get_kill_process()
 		timer=pyetun_kill.get_kill_timer_wait()
 
-		print "E17 Windows kill Options:"
+		print "> E17 Windows kill Options:"
 		
 		if possible=="KILL=1":
+			print bold_yellow("=> "),
 			print "Kill when close window is not possible: ENABLED (1)"
 		else:
+			print bold_yellow("=> "),
 			print "Kill when close window is not possible: DISABLED (0)"
 		
 		if kill=="KILL=1":
+			print bold_yellow("=> "),
 			print "Kill process via E: ENABLED (1)"
 		else:
+			print bold_yellow("=> "),
 			print "Kill process via E : DISABLED (0) (via X Window System)"
-		
+		print bold_yellow("=> "),
 		print "Interval to wait before killing client: ",timer, "sec"
 
-		print "> Options: "
-		print bold("[k]ill when close not possible <0/1>") 
-		print bold("[e]nlightenment kill process <0/1>")
-		print bold("[s]et interval before killing <value in seconds>")
+		print bold_red("> Options: ")
+		print bold_green("[K]ILL WHEN CLOSE NOT POSSIBLE <0/1>") 
+		print bold_green("[E]NLIGHTENMENT KILL PROCESS <0/1>")
+		print bold_green("[S]ET INTERVAL BEFORE KILLING <value in seconds>")
 		print "> CTRL+C - Main Menu"
 		valu=raw_input("Option: ")
 		while 1:
@@ -463,7 +504,7 @@ def e17_kill():
 				t=valu.split(" ")
 				opt=t[0]
 				value=t[1]
-			except IndexError:
+			except ValueError,IndexError:
 				print "[error]: m00, wrong wrong wrong! ;-)"
 				e17_winlist()
 			
@@ -514,16 +555,16 @@ def e17_keys():
 		
 		
 		for index,i in enumerate(keys):
-			print bold("[MODIFIER+KEY] "),
+			print bold_yellow("[MODIFIER+KEY] "),
 			print mod[index],"+",i,
-			print bold(" [ACTION] "),
+			print bold_yellow(" [ACTION] "),
 			print action[index],
-			print bold(" [ACTION PARAMS] "),
+			print bold_yellow(" [ACTION PARAMS] "),
 			print par[index][:-1]
 
-		print "> Options: "
-		print bold("[a]dd keybinding  <modifier+key> <action> <action_params>") 
-		print bold("[d]elete keybinding <modifier+key> <action> <action_params>")
+		print bold_red("> Options: ")
+		print bold_green("[A]DD KEYBINDING  <modifier+key> <action> <action_params>") 
+		print bold_green("[D]ELETE KEYBINDING <modifier+key> <action> <action_params>")
 		print "EXAMPLE: a ALT+g exec gedit * This example creates a shortcut key (ALT+g) to open gedit *"
 
 		print "> CTRL+C - Main Menu"
@@ -553,6 +594,7 @@ def e17_keys():
 				e17_keys()
 
 			elif opt=="d":
+				
 				pyetun_keys.del_key(key_final,mod,action,param)
 				print bold("KEY:"),
 				print mod,"+",key, "DELETED!"
@@ -566,6 +608,93 @@ def e17_keys():
 		print "\nOops! exiting ;)"
 		console()
 
+def e17_focus():
+	try:
+		import pyetun_focus
+		focus_policy=pyetun_focus.get_focus()[:-1]
+		setting=pyetun_focus.get_setting()[:-1]
+		last=pyetun_focus.get_last_focused()[:-1]
+		revert=pyetun_focus.get_revert()[:-1]
+		
+		print "> Focus settings:"
+		print bold_yellow("=> "),
+		print "Focus Policy: ",focus_policy
+		print bold_yellow("=> "),
+		print "Focus Setting Policy: ",setting
+		if last=="1":
+			print bold_yellow("=> "),
+			print "Remember focused windows when switching desks: ENABLED(1)"
+		else:
+			print bold_yellow("=> "),
+			print "Remember focused windows when switching desks: DISABLED(0)"
+		
+		
+		if revert=="1":
+			print bold_yellow("=> "),
+			print "Focus the last focused window when you hide or close a focused window: ENABLED(1)"
+		else:
+			print bold_yellow("=> "),
+			print "Focus the last focused window when you hide or close a focused window: DISABLED(0)"
+		
+		print bold_red("> Options: ")
+		print bold_green("[F]OCUS POLICY <MOUSE, CLICK or SLOPPY>") 
+		print bold_green("[S]ETTING FOCUS POLICY <NONE, NEW_WINDOWS, NEW_DIALOG or NEW_DIALOG_IF_OWNER_FOCUSED>")
+		print bold_green("[R]EMEMBER FOCUSED WINDOWS WHEN SWITCHING DESKTOPS <0/1>")
+		print bold_green("F[O]CUS THE LAST FOCUSED WINDOWS WHEN YOU HIDE OR CLOSE A FOCUSED WINDOW <0/1>")
+		print "> CTRL+C - Main Menu"
+		valu=raw_input("Option: ")
+		while 1:
+			try:
+				t=valu.split(" ")
+				opt=t[0]
+				value=t[1]
+			except ValueError,IndexError:
+				print "[error]: m00, wrong wrong wrong! ;-)"
+				e17_focus()
+			
+			#value=float(value)
+			
+			if opt=="f":
+				pol=["MOUSE","CLICK","SLOPPY"]
+				if value in pol:
+					pyetun_focus.set_focus(value)
+					print bold("Done!")
+					e17_focus()
+				else:
+					print "[error]: Value is not correct!"
+			elif opt=="s":
+				set=["NONE", "NEW_WINDOWS", "NEW_DIALOG","NEW_DIALOG_IF_OWNER_FOCUSED"]
+				if value in set:
+					pyetun_focus.set_setting(value)
+					print bold("Done!")
+					e17_focus()
+				else:
+					print "[error]: Value is not correct!"
+			elif opt=="r":
+				value=int(value)
+				if value>=0 and value<=1:
+					pyetun_focus.set_last_focused(value)
+					print bold("Done!")
+					e17_focus()
+				else:
+					print bold("[error]: Value between 0 and 1")
+					e17_focus()
+			elif opt=="o":
+				value=int(value)
+				if value>=0 and value<=1:
+					pyetun_focus.set_revert(value)
+					print bold("Done!")
+					e17_focus()
+				else:
+					print bold("[error]: Value between 0 and 1")
+					e17_focus()
+					
+					
+
+		
+	except KeyboardInterrupt:
+		print "\nOops! exiting ;)"
+		console()
 
 console()
 	
