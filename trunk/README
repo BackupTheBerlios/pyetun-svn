@@ -1,0 +1,20 @@
+# PYETUN - README FILE # 
+Author: Luis "Drune" Marques
+
+PYETUN SNAPSHOTS from SVN:
+-----------------------------------------
+To install:				|
+-----------------------------------------
+
+* tar -zxvf pyetun_xxxx.tar.gz
+* cd pyetun_svn
+
+If it needs:
+ * chmod +x pyetun.py
+
+run it:
+* ./pyetun.py
+
+Note: Edit pyetun.conf to fit your needs ;)
+Enjoy.
+

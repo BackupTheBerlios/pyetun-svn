@@ -9,7 +9,7 @@ import os, sys
 def console():
 	try:
 		print """
-Python E17 tunner script (tm) * 
+* Python E17 tunner - PYETUN * 
 1 ) E17 modules
 2 ) Desktop names
 3 ) Border shade options
@@ -565,28 +565,50 @@ def e17_keys():
 		print bold_red("> Options: ")
 		print bold_green("[A]DD KEYBINDING  <modifier+key> <action> <action_params>") 
 		print bold_green("[D]ELETE KEYBINDING <modifier+key> <action> <action_params>")
-		print "EXAMPLE: a ALT+g exec gedit * This example creates a shortcut key (ALT+g) to open gedit *"
+		print "EXAMPLE: a shift+alt+g exec gedit * This example creates a shortcut key (ALT+g) to open gedit *"
 
 		print "> CTRL+C - Main Menu"
 		valu=raw_input("Option: ")
 		while 1:
 			try:
 				opt, key, action, param=valu.split(None,3)
-				
+				all_mod=["CTRL","ALT","SHIFT"]
 				#opt=t[0]
 				#key=t[1]
-				key_final=key.split("+")[1]
-				mod=key.split("+")[0]
+				plus = [x for x in key if x == '+']
+				nPlus = len(plus)
+				if nPlus==2:
+					mod1, mod2, key_final=key.split("+",2)
+					mod1=mod1.upper()
+					mod2=mod2.upper()
+					if mod1 and mod2 in all_mod:
+						mod='"'+mod1+"|"+mod2+'"'
+					else:
+						print bold("[error] modifier not valid. Only: CTRL, ALT, SHIFT!")
+
+				elif nPlus==1:
+					mod, key_final=key.split("+",1)
+					mod=mod.upper()
+					if mod in all_mod:
+						mod='"'+mod+'"'
+					else:
+						print bold("[error] modifier not valid. Only: CTRL, ALT, SHIFT!")
+
+				#mod=key.split("+")[0]
 				#action=t[2]
 				#param=t[3]
 				
-			except IndexError:
+			except ValueError, IndexError:
 				print "[error]: m00, wrong wrong wrong! ;-)"
 				e17_keys()
 			
 			
 			
 			if opt=="a":
+				
+				
+				param='"'+param+'"'
+				
 				pyetun_keys.add_key(key_final,mod,action,param)
 				print bold("KEY:"),
 				print mod,"+",key, "ADDED!"
@@ -594,6 +616,8 @@ def e17_keys():
 				e17_keys()
 
 			elif opt=="d":
+				
+				param='"'+param+'"'
 				
 				pyetun_keys.del_key(key_final,mod,action,param)
 				print bold("KEY:"),
