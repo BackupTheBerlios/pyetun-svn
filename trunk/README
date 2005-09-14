@@ -1,13 +1,13 @@
 # PYETUN - README FILE # 
 Author: Luis "Drune" Marques
 
-PYETUN SNAPSHOTS from SVN:
+
 -----------------------------------------
-To install:				|
+To install:		
 -----------------------------------------
 
-* tar -zxvf pyetun_xxxx.tar.gz
-* cd pyetun_svn
+* tar -zxvf pyetun-xx.tar.gz
+* cd pyetun-xx
 
 If it needs:
  * chmod +x pyetun.py
@@ -17,4 +17,22 @@ run it:
 
 Note: Edit pyetun.conf to fit your needs ;)
 Enjoy.
+
+-------------------------------------------
+Configuration: pyetun.conf
+------------------------------------------
+
+* There's a file with configuration options: pyetun.conf
+
+* You can change your enlightenment_remote path, if you dont know where is it, use "whereis enlightenment_remote" or "find -name / enlightenment_remote".
+
+Example (Default on Gentoo using Ebuilds):
+	[paths]
+	enlightement_remote="/usr/bin/enlightenment_remote"
+
+* You can also change modules (normal+extra) path. Check the example:
+Example:
+	[modules]
+	normal=/usr/lib/enlightenment/modules/
+	extra=/usr/lib/enlightenment/modules_extra/
 

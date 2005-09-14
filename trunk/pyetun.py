@@ -109,8 +109,8 @@ def e17_modules():
 					x=value.split(" ")
 					let=x[0]
 					mod=x[1]
-				except ValueError,IndexError:
-					print "[error]: m00, wrong wrong wrong! ;-)"
+				except:
+					print bold ("> Error: m00, wrong move! Try again..")
 					return e17_modules()
 	
 				if mod in modules:
@@ -120,7 +120,7 @@ def e17_modules():
 							return e17_modules()
 	
 						if modules[mod] == "-1" :
-							load_mod(mod)
+							pyetun_mod.load_mod(mod)
 							print bold("[M ] "+mod+" loaded!")
 							return e17_modules()
 					
@@ -130,7 +130,7 @@ def e17_modules():
 							return e17_modules()
 	
 						if modules[mod] == "1" or modules[mod] == "0" :
-							unload_mod(mod)
+							pyetun_mod.unload_mod(mod)
 							print bold("[M ] "+mod+" unloaded!")
 							return e17_modules()
 					
@@ -140,13 +140,13 @@ def e17_modules():
 							return e17_modules()
 	
 						if modules[mod] == "-1":
-							load_mod(mod)
-							enable_mod(mod)
+							pyetun_mod.load_mod(mod)
+							pyetun_mod.enable_mod(mod)
 							print bold("[M ] "+mod+" loaded and enabled!")
 							return e17_modules()
 	
 						if modules[mod] == "0" :
-							enable_mod(mod)
+							pyetun_mod.enable_mod(mod)
 							
 							print bold("[M ] "+mod+" enabled!")
 							return e17_modules()
@@ -157,7 +157,7 @@ def e17_modules():
 							return e17_modules()
 	
 						if modules[mod] == "1":
-							disable_mod(mod)
+							pyetun_mod.disable_mod(mod)
 							print bold("[M ] "+mod+" disabled!")
 							return e17_modules()
 					
@@ -197,18 +197,20 @@ def e17_name_desktop():
 			try:
 				opt, x, y, name = value.split(None,3)
 				
-			except ValueError, IndexError:
-				print "[error]: m00, wrong wrong wrong! ;-)"
+			except:
+				print bold ("> Error: m00, wrong move! Try again..")
 				return e17_name_desktop()
 			
 			#options
 			if opt=="a":
+				name='"'+name+'"'
 				pyetun_desk.add_des_name(x,y,name)
 				print "Desktop ",x,"",y,"renamed to ",
 				print bold(name)
 				return e17_name_desktop()
 			
 			elif opt=="d" and name in des_names:
+				name='"'+name+'"'
 				pyetun_desk.rm_des_name(x,y,name)
 				print "Desktop",x,"",y,">",
 				print bold(name),
@@ -258,8 +260,8 @@ def e17_bshade():
 				t=valu.split(" ")
 				opt=t[0]
 				value=t[1]
-			except ValueError,IndexError:
-				print "[error]: m00, wrong wrong wrong! ;-)"
+			except:
+				print bold ("> Error: m00, wrong move! Try again..")
 				e17_bshade()
 
 			if opt=="b":
@@ -288,7 +290,7 @@ def e17_languages():
 		import pyetun_lang
 		all=pyetun_lang.get_lang_list()
 		current=pyetun_lang.current_lang()
-		print "> Available Languagues: "
+		print "> Available Languages: "
 		for i in all:
 			print bold_yellow("=> "),
 			print i
@@ -311,8 +313,8 @@ def e17_languages():
 				t=valu.split(" ")
 				opt=t[0]
 				value=t[1]
-			except ValueError,IndexError:
-				print "[error]: m00, wrong wrong wrong! ;-)"
+			except:
+				print bold ("> Error: m00, wrong move! Try again..")
 				e17_languages()
 
 			if opt=="s":
@@ -380,11 +382,17 @@ def e17_winlist():
 				t=valu.split(" ")
 				opt=t[0]
 				value=t[1]
-			except ValueError,IndexError:
-				print "[error]: m00, wrong wrong wrong! ;-)"
+				value=int(value)
+			except:
+				print bold ("> Error: m00, wrong move! Try again..")
 				e17_winlist()
 			
-			value=int(value)
+			
+			#try:
+				
+			#except ValueError:
+			#	print "[error]: m00, wrong wrong wrong! ;-)"
+			#	e17_winlist()
 			
 			if opt=="l":
 				
@@ -444,8 +452,8 @@ def e17_cache():
 				t=valu.split(" ")
 				opt=t[0]
 				value=t[1]
-			except ValueError,IndexError:
-				print "[error]: m00, wrong wrong wrong! ;-)"
+			except:
+				print bold ("> Error: m00, wrong move! Try again..")
 				e17_cache()
 			
 			if opt=="f":
@@ -504,11 +512,12 @@ def e17_kill():
 				t=valu.split(" ")
 				opt=t[0]
 				value=t[1]
-			except ValueError,IndexError:
-				print "[error]: m00, wrong wrong wrong! ;-)"
+				value=float(value)
+			except:
+				print bold ("> Error: m00, wrong move! Try again..")
 				e17_winlist()
 			
-			value=float(value)
+			
 			
 			if opt=="k":
 				
@@ -598,8 +607,8 @@ def e17_keys():
 				#action=t[2]
 				#param=t[3]
 				
-			except ValueError, IndexError:
-				print "[error]: m00, wrong wrong wrong! ;-)"
+			except:
+				print bold ("> Error: m00, wrong move! Try again..")
 				e17_keys()
 			
 			
@@ -672,8 +681,8 @@ def e17_focus():
 				t=valu.split(" ")
 				opt=t[0]
 				value=t[1]
-			except ValueError,IndexError:
-				print "[error]: m00, wrong wrong wrong! ;-)"
+			except:
+				print bold ("> Error: m00, wrong move! Try again..")
 				e17_focus()
 			
 			#value=float(value)
@@ -695,7 +704,12 @@ def e17_focus():
 				else:
 					print "[error]: Value is not correct!"
 			elif opt=="r":
-				value=int(value)
+				try:
+					value=int(value)
+				except ValueError:
+					print bold("[error]: Value between 0 and 1")
+					e17_focus()
+
 				if value>=0 and value<=1:
 					pyetun_focus.set_last_focused(value)
 					print bold("Done!")
@@ -704,7 +718,12 @@ def e17_focus():
 					print bold("[error]: Value between 0 and 1")
 					e17_focus()
 			elif opt=="o":
-				value=int(value)
+				try:
+					value=int(value)
+				except ValueError:
+					print bold("[error]: Value between 0 and 1")
+					e17_focus()
+
 				if value>=0 and value<=1:
 					pyetun_focus.set_revert(value)
 					print bold("Done!")
