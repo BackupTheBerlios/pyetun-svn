@@ -65,7 +65,9 @@ def console():
 		sys.exit()
 
 def bold(s): 
+	
 	return "\033[1m%s\033[0m" %s
+	
 
 def bold_green(s):
 	return "\033[1;32m%s\033[0m" %s
@@ -280,17 +282,45 @@ def e17_bshade():
 				e17_bshade()
 
 			if opt=="b":
-				pyetun_bshade.set_bshade(value)
-				print bold("Done!")
-				e17_bshade()
+				try:
+					value=int(value)
+					if value>=0 and value<=1:
+						pyetun_bshade.set_bshade(value)
+						print bold("Done!")
+						e17_bshade()
+					else:
+						print bold("[error]: Value between 0 and 1")
+						e17_bshade()
+	
+				except ValueError:
+					print bold("[error]: Value between 0 and 1")
+					e17_bshade()
+		
 			elif opt=="a":
-				pyetun_bshade.set_trans_alg(value)
-				print bold("Done!")
-				e17_bshade()
+				try:
+					value=int(value)
+					if value>=0 and value<=3:
+						pyetun_bshade.set_trans_alg(value)
+						print bold("Done!")
+						e17_bshade()
+					else:
+						print bold("[error]: Value between 0 and 1")
+						e17_bshade()
+	
+				except ValueError:
+					print bold("[error]: Value between 0 and 1")
+					e17_bshade()
+
 			elif opt=="s":
-				pyetun_bshade.set_shade_speed(value)
-				print bold("Done!")
-				e17_bshade()
+				try:
+					value=float(value)
+					pyetun_bshade.set_shade_speed(value)
+					print bold("Done!")
+					e17_bshade()
+
+				except ValueError:
+					print bold("[error]: Value must be a valid number")
+					e17_bshade()
 			else:
 				print bold("[error] m000 wrong option!")
 				e17_bshade()
@@ -472,14 +502,25 @@ def e17_cache():
 				e17_cache()
 			
 			if opt=="f":
-				pyetun_cache.set_font_cache(value)
-				print bold("Done!")
-				e17_cache()
+				try:
+					value=float(value)
+					pyetun_cache.set_font_cache(value)
+					print bold("Done!")
+					e17_cache()
+				except ValueError:
+					print bold("[error]: Value must be a valid number")
+					e17_cache()
+	
 			elif opt=="i":
-				pyetun_cache.set_image_cache(value)
-				print bold("Done!")
-				e17_cache()
-		 	 
+				try:
+					value=float(value)
+					pyetun_cache.set_image_cache(value)
+					print bold("Done!")
+					e17_cache()
+		 	 	except ValueError:
+					print bold("[error]: Value must be a valid number")
+					e17_cache()
+
 			else:
 				print bold("[error] m000 wrong option!")
 				e17_cache()
@@ -530,7 +571,7 @@ def e17_kill():
 				value=float(value)
 			except:
 				print bold ("> Error: m00, wrong move! Try again..")
-				e17_winlist()
+				e17_kill()
 			
 			
 			
@@ -552,7 +593,7 @@ def e17_kill():
 			
 				else:
 					print bold("[error]: Value between 0 and 1")
-					e17_winlist()
+					e17_kill()
 
 
 			elif opt=="s":
@@ -573,29 +614,38 @@ def e17_keys():
 	try:
 		import pyetun_keys
 		keys=pyetun_keys.get_KEYS()
-		mod=pyetun_keys.get_MODIFIERS()
-		action=pyetun_keys.get_ACTION()
+		modu=pyetun_keys.get_MODIFIERS()
+		act=pyetun_keys.get_ACTION()
 		par=pyetun_keys.get_PARAMS()
 		
 		
 		for index,i in enumerate(keys):
 			print bold_yellow("[MODIFIER+KEY] "),
-			print mod[index],"+",i,
+			print modu[index],"+",i,
 			print bold_yellow(" [ACTION] "),
-			print action[index],
+			print act[index],
 			print bold_yellow(" [ACTION PARAMS] "),
 			print par[index][:-1]
 
 		print bold_red("> Options: ")
 		print bold_green("[A]DD KEYBINDING  <modifier+key> <action> <action_params>") 
-		print bold_green("[D]ELETE KEYBINDING <modifier+key> <action> <action_params>")
+		print bold_green("[D]ELETE KEYBINDING <modifier+key>")
 		print "EXAMPLE: a shift+alt+g exec gedit * This example creates a shortcut key (ALT+g) to open gedit *"
 
 		print "> CTRL+C - Main Menu"
 		valu=raw_input("Option: ")
 		while 1:
+			
+			opt=valu.split(" ")[0]
+			
 			try:
-				opt, key, action, param=valu.split(None,3)
+				if opt=="a":
+					opt, key, action, param=valu.split(None,3)
+				elif opt=="d":
+					key=valu.split(" ")[1]
+					action=""
+					param=""
+
 				all_mod=["CTRL","ALT","SHIFT"]
 				#opt=t[0]
 				#key=t[1]
@@ -603,50 +653,75 @@ def e17_keys():
 				nPlus = len(plus)
 				if nPlus==2:
 					mod1, mod2, key_final=key.split("+",2)
-					mod1=mod1.upper()
-					mod2=mod2.upper()
-					if mod1 and mod2 in all_mod:
-						mod='"'+mod1+"|"+mod2+'"'
+					modifier1=mod1.upper()
+					modifier2=mod2.upper()
+					
+					if modifier1 in all_mod and modifier2 in all_mod:
+			
+						mod='"'+modifier1+"|"+modifier2+'"'
+
 					else:
 						print bold("[error] modifier not valid. Only: CTRL, ALT, SHIFT!")
-
-				elif nPlus==1:
+						e17_keys()
+				
+				
+				else:
 					mod, key_final=key.split("+",1)
 					mod=mod.upper()
 					if mod in all_mod:
 						mod='"'+mod+'"'
 					else:
 						print bold("[error] modifier not valid. Only: CTRL, ALT, SHIFT!")
-
-				#mod=key.split("+")[0]
-				#action=t[2]
-				#param=t[3]
 				
 			except:
+				
 				print bold ("> Error: m00, wrong move! Try again..")
 				e17_keys()
 			
 			
 			
 			if opt=="a":
-				
+			
 				
 				param='"'+param+'"'
 				
 				pyetun_keys.add_key(key_final,mod,action,param)
 				print bold("KEY:"),
-				print mod,"+",key, "ADDED!"
+				print key, "ADDED!"
 
 				e17_keys()
 
 			elif opt=="d":
 				
-				param='"'+param+'"'
+			
+
+				key_final2='"'+key_final+'"'
+				mod2=mod.split('"')[1]
 				
-				pyetun_keys.del_key(key_final,mod,action,param)
-				print bold("KEY:"),
-				print mod,"+",key, "DELETED!"
-				e17_keys()
+				#print mod
+				if key_final2 in keys and mod2 in modu:
+			
+					for inde, i in enumerate(keys):
+						
+						if modu[inde] == mod2 and keys[inde]==key_final2:
+							action=act[inde]
+							param=par[inde]
+							ok=True
+							break
+		
+						else:
+							ok=False
+
+					
+				if ok==True:		
+					pyetun_keys.del_key(key_final,mod,action,param)
+					print bold("KEY:"),
+					print key, "DELETED!"
+					e17_keys()
+					
+				else:
+					print bold("[error] Invalid keybinding!")
+					e17_keys()
 			
 			else:
 				print bold("[error] m000 wrong option!")

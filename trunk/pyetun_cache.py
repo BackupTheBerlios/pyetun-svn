@@ -18,7 +18,9 @@ def get_image_cache():
 	return img
 
 def set_font_cache(value):
+	value=str(value)
 	os.popen(e_remote_path+" -font-cache-set "+value)
 
 def set_image_cache(value):
+	value=str(value)
 	os.popen(e_remote_path+" -image-cache-set "+value)
