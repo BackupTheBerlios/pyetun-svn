@@ -5,6 +5,21 @@ import os, sys
 # Config file Object return
 
 
+def check_enligh_remote():
+	try:
+		import pyetun_cfg
+		e_path=pyetun_cfg.return_remote()
+		if not os.path.exists(e_path):
+			print "[error] enlightenment_remote NOT found in:",e_path,".Check pyetun.conf and set correct path!"
+			print "* Exiting.."
+			sys.exit()
+		else:
+			print "* enlightenment_remote found!"
+			print "* Starting pyetun.."
+			pass
+	except KeyboardInterrupt:
+		print "Thanks for using E17 tunner. You're now a rice boy.. ;)\n"
+		sys.exit()
 
 def console():
 	try:
@@ -739,5 +754,6 @@ def e17_focus():
 		print "\nOops! exiting ;)"
 		console()
 
+check_enligh_remote()
 console()
 	

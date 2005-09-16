@@ -24,6 +24,8 @@ def return_remote():
 	config=return_cfg()
 	value=config.get("paths","enlightement_remote")
 	return value
+		
+
 
 def return_modpath(mod_type):
 	config=return_cfg()
