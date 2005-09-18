@@ -208,14 +208,19 @@ def e17_name_desktop():
 
 		print bold_red("> Options: ")
 		print bold_green("[a]dd <DESK_X> <DESK_Y> <Desktop name> ") 
-		print bold_green("[d]elete <DESK_X> <DESK_Y> <Desktop name>")
+		print bold_green("[d]elete <DESK_X> <DESK_Y> ")
 		print "> CTRL+C - Main Menu"
 		
 		value=raw_input("Option: ")
 		while 1:
 			try:
-				opt, x, y, name = value.split(None,3)
-				
+				opt=value.split(" ")[0]
+				if opt=="a":
+					opt, x, y, name = value.split(None,3)
+				elif opt=="d":
+					opt, x, y = value.split(None,2)
+					
+	
 			except:
 				print bold ("> Error: m00, wrong move! Try again..")
 				return e17_name_desktop()
@@ -228,8 +233,17 @@ def e17_name_desktop():
 				print bold(name)
 				return e17_name_desktop()
 			
-			elif opt=="d" and name in des_names:
-				name='"'+name+'"'
+			elif opt=="d":
+				for j in des_names:
+					v= des_names[j].split("=")
+					v2=v[1].split(" ")[0]
+					#damn i love python hacks ;)
+					if v2 == x and v[2] == y:
+						name=j
+						break
+
+				
+				
 				pyetun_desk.rm_des_name(x,y,name)
 				print "Desktop",x,"",y,">",
 				print bold(name),
@@ -823,8 +837,9 @@ def e17_focus():
 				else:
 					print bold("> Error: Value between 0 and 1")
 					e17_focus()
-					
-					
+			else:
+				print bold("> Error: m000 wrong option!")
+				e17_focus()
 
 		
 	except KeyboardInterrupt:
@@ -862,6 +877,7 @@ def e17_font():
 				size=t[3]
 			except:
 				print bold ("> Error: m00, wrong move! Try again..")
+				
 				e17_font()
 			
 			#value=float(value)
@@ -871,6 +887,7 @@ def e17_font():
 					size=int(size)
 				except ValueError:
 					print bold("> Error: Size must be an integer..")
+					enter()
 					e17_font()
 				
 	
@@ -880,17 +897,25 @@ def e17_font():
 					print bold("* IMPORTANT: You need to restart E to apply changes..")
 					
 					pyetun_font.apply_font()
-					raw_input("> Press Enter to continue..")
-
+					enter()
 					e17_font()
+
+					
 				else:
 					print bold("> Error: Font not available! Please check available fonts..")
-					e17_font()	
+					e17_font()
+
+			else:
+				print bold("> Error: m000 wrong option!")
+				e17_font()
+	
 	except KeyboardInterrupt:
 		print "\nOops! exiting ;)"
 		console()
 
 
+def enter():
+	raw_input("> Press Enter to continue..")
 
 # MAIN FUNCTIONS :)
 check_enligh_remote()

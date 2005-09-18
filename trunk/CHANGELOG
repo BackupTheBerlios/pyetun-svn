@@ -8,5 +8,6 @@ PYETUN - Changelog ;)
 * 0.2:
 	- Error handling in enlightenment_remote path done. Thanks to eksajm!
 	- Delete keydinding simplified. Ex: d alt+r
-	- Font Settings added!
+	- Font Settings added (maybe incomplete yet..dunno)!
+	- Delete Desktop name simplified.
 	- Many bug fixes

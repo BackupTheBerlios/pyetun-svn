@@ -5,7 +5,7 @@ Author: Luis "Drune" Marques
 -----------------------------------------
 To install:		
 -----------------------------------------
-
+As root:
 * python setup.py install
 
 Run with:
