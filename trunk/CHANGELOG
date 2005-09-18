@@ -1,0 +1,12 @@
+PYETUN - Changelog ;)
+
+* 0.1 - Initial Release.
+
+* 0.1.1 - Fix Release:
+	- Bug fix in modules
+
+* 0.2:
+	- Error handling in enlightenment_remote path done. Thanks to eksajm!
+	- Delete keydinding simplified. Ex: d alt+r
+	- Font Settings added!
+	- Many bug fixes
