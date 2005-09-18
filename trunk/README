@@ -6,14 +6,10 @@ Author: Luis "Drune" Marques
 To install:		
 -----------------------------------------
 
-* tar -zxvf pyetun-xx.tar.gz
-* cd pyetun-xx
+* python setup.py install
 
-If it needs:
- * chmod +x pyetun.py
-
-run it:
-* ./pyetun.py
+Run with:
+* pyetun ( or /usr/bin/pyetun )
 
 Note: Edit pyetun.conf to fit your needs ;)
 Enjoy.

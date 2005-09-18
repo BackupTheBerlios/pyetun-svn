@@ -4,8 +4,8 @@ def return_cfg():
 	try:
 		import ConfigParser
 		config = ConfigParser.ConfigParser()
-		if os.path.exists("pyetun.conf"):
-			config.read("pyetun.conf")
+		if os.path.exists("/etc/pyetun.conf"):
+			config.read("/etc/pyetun.conf")
 			
 			return config
 		
