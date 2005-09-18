@@ -34,6 +34,7 @@ def console():
 7 ) Windows kill options
 8 ) Keybindings 
 9 ) Windows Focus Settings
+10) Font Settings
 0 ) Exit
 """
 		rsp = raw_input ("Option: ")
@@ -55,7 +56,8 @@ def console():
 			e17_keys()
 		elif rsp=="9":
 			e17_focus()
-			
+		elif rsp=="10":
+			e17_font()
 		elif rsp =="0":
 			print "Thanks for using E17 tunner. You're now a rice boy.. ;)\n"
 			sys.exit()
@@ -109,10 +111,10 @@ def e17_modules():
 				print "[ status: disabled,unloaded ]"
 		
 		print bold_red("> Options: ")
-		print bold_green("[E]NABLE <module name>") 
-		print bold_green("[D]ISABLE <module name>")
-		print bold_green("[L]OAD <module name>")
-		print bold_green("[U]NLOAD <module name>")
+		print bold_green("[e]nable <module name>") 
+		print bold_green("[d]isable <module name>")
+		print bold_green("[l]oad <module name>")
+		print bold_green("[u]nload <module name>")
 		print "> CTRL+C - Main Menu"
 	
 		value=raw_input("Option: ")
@@ -179,11 +181,11 @@ def e17_modules():
 							return e17_modules()
 					
 					else:
-						print bold("[error] m000 wrong option!")
+						print  bold("> Error: m000 wrong option!")
 						return e17_modules()
 
 				else:
-					print bold("[error] m00dule not found! Check the list..")
+					print bold("> Error: m00dule not found! Check the list..")
 					return e17_modules()
 
 	except KeyboardInterrupt:
@@ -205,8 +207,8 @@ def e17_name_desktop():
 			print bold(">"), des_names[i]
 
 		print bold_red("> Options: ")
-		print bold_green("[A]DD <DESK_X> <DESK_Y> <Desktop name> ") 
-		print bold_green("[D]ELETE <DESK_X> <DESK_Y> <Desktop name>")
+		print bold_green("[a]dd <DESK_X> <DESK_Y> <Desktop name> ") 
+		print bold_green("[d]elete <DESK_X> <DESK_Y> <Desktop name>")
 		print "> CTRL+C - Main Menu"
 		
 		value=raw_input("Option: ")
@@ -235,7 +237,7 @@ def e17_name_desktop():
 				return e17_name_desktop()
 			
 			else:
-					print bold("[error] m000 wrong option!")
+					print bold("> Error: m000 wrong option!")
 					e17_name_desktop()
 	except KeyboardInterrupt:
 		print "\nOops! exiting ;)"
@@ -266,9 +268,9 @@ def e17_bshade():
 		
 		#Options
 		print bold_red("> Options: ")
-		print bold_green("[B]ORDER SHADE ANIMATION <0/1>") 
-		print bold_green("[A]NIMATION ALGORITHM <value between 0 and 3>")
-		print bold_green("[S]HADING SPEED <value>")
+		print bold_green("[b]order shade animation <0/1>") 
+		print bold_green("[a]animation algorithm <value between 0 and 3>")
+		print bold_green("[s]hading speed <value>")
 		print "> CTRL+C - Main Menu"
 		
 		valu=raw_input("Option: ")
@@ -289,11 +291,11 @@ def e17_bshade():
 						print bold("Done!")
 						e17_bshade()
 					else:
-						print bold("[error]: Value between 0 and 1")
+						print bold("> Error: Value between 0 and 1")
 						e17_bshade()
 	
 				except ValueError:
-					print bold("[error]: Value between 0 and 1")
+					print bold("> Error: Value between 0 and 1")
 					e17_bshade()
 		
 			elif opt=="a":
@@ -304,11 +306,11 @@ def e17_bshade():
 						print bold("Done!")
 						e17_bshade()
 					else:
-						print bold("[error]: Value between 0 and 1")
+						print bold("> Error: Value between 0 and 1")
 						e17_bshade()
 	
 				except ValueError:
-					print bold("[error]: Value between 0 and 1")
+					print bold("> Error: Value between 0 and 1")
 					e17_bshade()
 
 			elif opt=="s":
@@ -319,10 +321,10 @@ def e17_bshade():
 					e17_bshade()
 
 				except ValueError:
-					print bold("[error]: Value must be a valid number")
+					print bold("> Error: Value must be a valid number")
 					e17_bshade()
 			else:
-				print bold("[error] m000 wrong option!")
+				print bold("> Error: m000 wrong option!")
 				e17_bshade()
 
 	except KeyboardInterrupt:
@@ -349,7 +351,7 @@ def e17_languages():
 			print current
 		
 		print bold_red("> Options: ")
-		print bold_green("[S]ET LANGUAGE <language name>")
+		print bold_green("[s]et language <language name>")
 		print "> CTRL+C - Main Menu"
 	
 		valu=raw_input("Option: ")
@@ -368,10 +370,10 @@ def e17_languages():
 					pyetun_lang.set_lang(value) 
 					e17_languages()
 				else:
-					print bold("[error]: This language is not present. Check the list..")
+					print bold("> Error: This language is not present. Check the list..")
 					e17_languages()
 			else:
-				print bold("[error] m000 wrong option!")
+				print bold("> Error: m000 wrong option!")
 				e17_languages()
 
 	except KeyboardInterrupt:
@@ -416,9 +418,9 @@ def e17_winlist():
 				print "You need ENABLE [L]IST OTHER DESKTOPS WINDOWS to use this option.."
 
 		print bold_red("> Options: ")
-		print bold_green("[L]IST OTHER DESKTOPS WINDOWS <0 or 1>")
-		print bold_green("[S]SHOW ICONIFIED WINDOWS <0 or 1>")
-		print bold_green("[J]UMP TO DESKTOPS WHILE SELECTING <0 or 1>")
+		print bold_green("[l]ist other desktop windows <0 or 1>")
+		print bold_green("[s]how iconified windows <0 or 1>")
+		print bold_green("[j]ump to desktops while selecting <0 or 1>")
 		print "> CTRL+C - Main Menu"
 	
 		valu=raw_input("Option: ")
@@ -446,7 +448,7 @@ def e17_winlist():
 					print bold("Done!")
 					e17_winlist()
 				else:
-					print bold("[error]: Value between 0 and 1")
+					print bold("> Error: Value between 0 and 1")
 					e17_winlist()
 			
 			elif opt=="s":
@@ -461,10 +463,10 @@ def e17_winlist():
 					print bold("Done!")
 					e17_winlist()
 				else:
-					print bold("[error]: Value between 0 and 1")
+					print bold("> Error: Value between 0 and 1")
 					e17_winlist()
 			else:
-				print bold("[error] m000 wrong option!")
+				print bold("> Error: m000 wrong option!")
 				e17_winlist()
 			
 
@@ -486,8 +488,8 @@ def e17_cache():
 		print "Image:",img[0], "Kb  [default: 4096Kb]"
 		
 		print bold_red("> Options: ")
-		print bold_green("[F]ONT SIZE CACHE <Kb>")
-		print bold_green("[I]MAGE SIZE CACHE <Kb>")
+		print bold_green("[f]ont size cache <Kb>")
+		print bold_green("[i]mage size cache <Kb>")
 		
 		print "> CTRL+C - Main Menu"
 	
@@ -508,7 +510,7 @@ def e17_cache():
 					print bold("Done!")
 					e17_cache()
 				except ValueError:
-					print bold("[error]: Value must be a valid number")
+					print bold("> Error: Value must be a valid number")
 					e17_cache()
 	
 			elif opt=="i":
@@ -518,11 +520,11 @@ def e17_cache():
 					print bold("Done!")
 					e17_cache()
 		 	 	except ValueError:
-					print bold("[error]: Value must be a valid number")
+					print bold("> Error: Value must be a valid number")
 					e17_cache()
 
 			else:
-				print bold("[error] m000 wrong option!")
+				print bold("> Error: m000 wrong option!")
 				e17_cache()
 
 		 
@@ -558,9 +560,9 @@ def e17_kill():
 		print "Interval to wait before killing client: ",timer, "sec"
 
 		print bold_red("> Options: ")
-		print bold_green("[K]ILL WHEN CLOSE NOT POSSIBLE <0/1>") 
-		print bold_green("[E]NLIGHTENMENT KILL PROCESS <0/1>")
-		print bold_green("[S]ET INTERVAL BEFORE KILLING <value in seconds>")
+		print bold_green("[k]ill when close not possible <0/1>") 
+		print bold_green("[e]nlightenment kill process <0/1>")
+		print bold_green("[s]et internal before killing <value in seconds>")
 		print "> CTRL+C - Main Menu"
 		valu=raw_input("Option: ")
 		while 1:
@@ -582,7 +584,7 @@ def e17_kill():
 					print bold("Done!")
 					e17_kill()
 				else:
-					print bold("[error]: Value between 0 and 1")
+					print bold("> Error: Value between 0 and 1")
 					e17_kill()
 			
 			elif opt=="e":
@@ -592,7 +594,7 @@ def e17_kill():
 					e17_kill()
 			
 				else:
-					print bold("[error]: Value between 0 and 1")
+					print bold("> Error: Value between 0 and 1")
 					e17_kill()
 
 
@@ -602,7 +604,7 @@ def e17_kill():
 				e17_kill()
 
 			else:
-				print bold("[error] m000 wrong option!")
+				print bold("> Error: m000 wrong option!")
 				e17_kill()
 			
 
@@ -628,8 +630,8 @@ def e17_keys():
 			print par[index][:-1]
 
 		print bold_red("> Options: ")
-		print bold_green("[A]DD KEYBINDING  <modifier+key> <action> <action_params>") 
-		print bold_green("[D]ELETE KEYBINDING <modifier+key>")
+		print bold_green("[a]dd keybinding  <modifier+key> <action> <action_params>") 
+		print bold_green("[d]elete keybinding <modifier+key>")
 		print "EXAMPLE: a shift+alt+g exec gedit * This example creates a shortcut key (ALT+g) to open gedit *"
 
 		print "> CTRL+C - Main Menu"
@@ -661,7 +663,7 @@ def e17_keys():
 						mod='"'+modifier1+"|"+modifier2+'"'
 
 					else:
-						print bold("[error] modifier not valid. Only: CTRL, ALT, SHIFT!")
+						print bold("> Error: modifier not valid. Only: CTRL, ALT, SHIFT!")
 						e17_keys()
 				
 				
@@ -671,7 +673,7 @@ def e17_keys():
 					if mod in all_mod:
 						mod='"'+mod+'"'
 					else:
-						print bold("[error] modifier not valid. Only: CTRL, ALT, SHIFT!")
+						print bold("> Error: modifier not valid. Only: CTRL, ALT, SHIFT!")
 				
 			except:
 				
@@ -720,11 +722,11 @@ def e17_keys():
 					e17_keys()
 					
 				else:
-					print bold("[error] Invalid keybinding!")
+					print bold("> Error: Invalid keybinding!")
 					e17_keys()
 			
 			else:
-				print bold("[error] m000 wrong option!")
+				print bold("> Error: m000 wrong option!")
 				e17_keys()
 
 	except KeyboardInterrupt:
@@ -760,10 +762,10 @@ def e17_focus():
 			print "Focus the last focused window when you hide or close a focused window: DISABLED(0)"
 		
 		print bold_red("> Options: ")
-		print bold_green("[F]OCUS POLICY <MOUSE, CLICK or SLOPPY>") 
-		print bold_green("[S]ETTING FOCUS POLICY <NONE, NEW_WINDOWS, NEW_DIALOG or NEW_DIALOG_IF_OWNER_FOCUSED>")
-		print bold_green("[R]EMEMBER FOCUSED WINDOWS WHEN SWITCHING DESKTOPS <0/1>")
-		print bold_green("F[O]CUS THE LAST FOCUSED WINDOWS WHEN YOU HIDE OR CLOSE A FOCUSED WINDOW <0/1>")
+		print bold_green("[f]ocus policy <MOUSE, CLICK or SLOPPY>") 
+		print bold_green("[s]etting focus policy <NONE, NEW_WINDOWS, NEW_DIALOG or NEW_DIALOG_IF_OWNER_FOCUSED>")
+		print bold_green("[r]emember focused windows when switching desktops <0/1>")
+		print bold_green("f[o]cus the last focused windows when you hide or close a focused window <0/1>")
 		print "> CTRL+C - Main Menu"
 		valu=raw_input("Option: ")
 		while 1:
@@ -797,7 +799,7 @@ def e17_focus():
 				try:
 					value=int(value)
 				except ValueError:
-					print bold("[error]: Value between 0 and 1")
+					print bold("> Error: Value between 0 and 1")
 					e17_focus()
 
 				if value>=0 and value<=1:
@@ -805,13 +807,13 @@ def e17_focus():
 					print bold("Done!")
 					e17_focus()
 				else:
-					print bold("[error]: Value between 0 and 1")
+					print bold("> Error: Value between 0 and 1")
 					e17_focus()
 			elif opt=="o":
 				try:
 					value=int(value)
 				except ValueError:
-					print bold("[error]: Value between 0 and 1")
+					print bold("> Error: Value between 0 and 1")
 					e17_focus()
 
 				if value>=0 and value<=1:
@@ -819,7 +821,7 @@ def e17_focus():
 					print bold("Done!")
 					e17_focus()
 				else:
-					print bold("[error]: Value between 0 and 1")
+					print bold("> Error: Value between 0 and 1")
 					e17_focus()
 					
 					
@@ -829,6 +831,68 @@ def e17_focus():
 		print "\nOops! exiting ;)"
 		console()
 
+def e17_font():
+	try:
+		import pyetun_font
+		print bold( "> Available fonts:")
+		fonts=pyetun_font.get_all_fonts()
+		fallback=pyetun_font.get_fallback_fonts()
+		clas=pyetun_font.get_text_classes()
+		for i in fonts:
+			print bold_yellow("=> "),
+			print i
+		print bold("> Fallback fonts (International text - non 'basic' chars ):")
+		for j in fallback:
+			print bold_yellow("=> "),
+			print j
+		print bold(">> Text Classes found in your system:")
+		for i in clas:
+			print bold_yellow("=> "),
+			print i
+
+		print bold_red("> Options: ")
+		print bold_green("[d]efault font set <textclass> <font> <size>")
+		valu=raw_input("Option: ")
+		while 1:
+			try:
+				t=valu.split(" ")
+				opt=t[0]
+				t_class=t[1]
+				f_name=t[2]
+				size=t[3]
+			except:
+				print bold ("> Error: m00, wrong move! Try again..")
+				e17_font()
+			
+			#value=float(value)
+			
+			if opt=="d":
+				try:
+					size=int(size)
+				except ValueError:
+					print bold("> Error: Size must be an integer..")
+					e17_font()
+				
+	
+				if f_name in fonts: 
+					pyetun_font.set_font_default(t_class,f_name,size)
+					print bold("* Done. Setting new font now..")
+					print bold("* IMPORTANT: You need to restart E to apply changes..")
+					
+					pyetun_font.apply_font()
+					raw_input("> Press Enter to continue..")
+
+					e17_font()
+				else:
+					print bold("> Error: Font not available! Please check available fonts..")
+					e17_font()	
+	except KeyboardInterrupt:
+		print "\nOops! exiting ;)"
+		console()
+
+
+
+# MAIN FUNCTIONS :)
 check_enligh_remote()
 console()
 	
