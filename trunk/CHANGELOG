@@ -11,3 +11,9 @@ PYETUN - Changelog ;)
 	- Font Settings added (maybe incomplete yet..dunno)!
 	- Delete Desktop name simplified.
 	- Many bug fixes
+
+* 0.2.1 - Fix Release:
+	- Fix Border Shade options (Thanks to Selman ULUG <selman@softhome.net>). It's a critical bug because option "b" doesnt work as 		expected.
+	- Bug on Winlist option "s".
+	- Now all works in pyetun (i hope..)
+	

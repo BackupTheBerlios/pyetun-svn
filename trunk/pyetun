@@ -320,11 +320,11 @@ def e17_bshade():
 						print bold("Done!")
 						e17_bshade()
 					else:
-						print bold("> Error: Value between 0 and 1")
+						print bold("> Error: Value between 0 and 3")
 						e17_bshade()
 	
 				except ValueError:
-					print bold("> Error: Value between 0 and 1")
+					print bold("> Error: Value between 0 and 3s")
 					e17_bshade()
 
 			elif opt=="s":
@@ -469,6 +469,10 @@ def e17_winlist():
 				if value>=0 and value<=1:
 					pyetun_winlist.set_show_iconified_windows(value)
 					print bold("Done!")
+					e17_winlist()
+
+				else:
+					print bold("> Error: Value between 0 and 1")
 					e17_winlist()
 			
 			elif opt=="j":

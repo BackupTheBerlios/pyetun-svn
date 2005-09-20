@@ -31,16 +31,15 @@ def get_shade_speed():
 	return val
 
 def set_bshade(value):
-	if value >= 0 or value <=1:
-		os.popen(e_remote_path+" -border-shade-animate-set "+value)
-	else:
-		print "[error] Value != 0 or 1"
+	value=str(value)
+	os.popen(e_remote_path+" -border-shade-animate-set "+value)
 
 def set_trans_alg(value):
-		if value >= 0 or value <=3:
-			os.popen(e_remote_path+" -border-shade-transition-set "+value)
-		else:
-			print "[error] Value between 0 and 3"
+		
+	value=str(value)			
+	os.popen(e_remote_path+" -border-shade-transition-set "+value)
+
 
 def set_shade_speed(value):
+	value=str(value)
 	os.popen(e_remote_path+" -border-shade-speed-set "+value)
