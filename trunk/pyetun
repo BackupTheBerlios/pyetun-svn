@@ -121,7 +121,8 @@ def e17_modules():
 		if value == "s":
 			status()
 			return e17_modules()
-	
+			
+
 		else:
 			while 1:
 				try:
@@ -131,63 +132,65 @@ def e17_modules():
 				except:
 					print bold ("> Error: m00, wrong move! Try again..")
 					return e17_modules()
-	
+					break
 				if mod in modules:
 					if let=="l":
 						if modules[mod] == "1" or modules[mod] == "0":
 							print bold("[ *] Module already loaded!")
 							return e17_modules()
-	
+							break
 						if modules[mod] == "-1" :
 							pyetun_mod.load_mod(mod)
 							print bold("[M ] "+mod+" loaded!")
 							return e17_modules()
-					
+							break	
 					elif let=="u":
 						if modules[mod] == "-1":
 							print bold("[ *] Module already unabled!")
 							return e17_modules()
-	
+							break
 						if modules[mod] == "1" or modules[mod] == "0" :
 							pyetun_mod.unload_mod(mod)
 							print bold("[M ] "+mod+" unloaded!")
 							return e17_modules()
-					
+							break
 					elif let == "e":
 						if modules[mod] == "1":
 							print bold("[ *] Module already enabled!")
 							return e17_modules()
-	
+							break
 						if modules[mod] == "-1":
 							pyetun_mod.load_mod(mod)
 							pyetun_mod.enable_mod(mod)
 							print bold("[M ] "+mod+" loaded and enabled!")
 							return e17_modules()
-	
+							break
 						if modules[mod] == "0" :
 							pyetun_mod.enable_mod(mod)
 							
 							print bold("[M ] "+mod+" enabled!")
 							return e17_modules()
-		
+							break
 					elif let == "d":
 						if modules[mod] == "0":
 							print bold("[ *] Module already disabled!")
 							return e17_modules()
-	
+							break
+
 						if modules[mod] == "1":
 							pyetun_mod.disable_mod(mod)
 							print bold("[M ] "+mod+" disabled!")
 							return e17_modules()
-					
+							break
 					else:
 						print  bold("> Error: m000 wrong option!")
 						return e17_modules()
+						break
 
 				else:
 					print bold("> Error: m00dule not found! Check the list..")
 					return e17_modules()
-
+					break
 	except KeyboardInterrupt:
 		print "\nOops! exiting ;)"
 		console()
@@ -224,6 +227,7 @@ def e17_name_desktop():
 			except:
 				print bold ("> Error: m00, wrong move! Try again..")
 				return e17_name_desktop()
+				break
 			
 			#options
 			if opt=="a":
@@ -232,6 +236,7 @@ def e17_name_desktop():
 				print "Desktop ",x,"",y,"renamed to ",
 				print bold(name)
 				return e17_name_desktop()
+				break
 			
 			elif opt=="d":
 				for j in des_names:
@@ -249,10 +254,12 @@ def e17_name_desktop():
 				print bold(name),
 				print "deleted to original value.."
 				return e17_name_desktop()
+				break
 			
 			else:
 					print bold("> Error: m000 wrong option!")
 					e17_name_desktop()
+					break
 	except KeyboardInterrupt:
 		print "\nOops! exiting ;)"
 		console()
@@ -296,6 +303,7 @@ def e17_bshade():
 			except:
 				print bold ("> Error: m00, wrong move! Try again..")
 				e17_bshade()
+				break
 
 			if opt=="b":
 				try:
@@ -304,13 +312,16 @@ def e17_bshade():
 						pyetun_bshade.set_bshade(value)
 						print bold("Done!")
 						e17_bshade()
+						break
 					else:
 						print bold("> Error: Value between 0 and 1")
 						e17_bshade()
+						break
 	
 				except ValueError:
 					print bold("> Error: Value between 0 and 1")
 					e17_bshade()
+					break
 		
 			elif opt=="a":
 				try:
@@ -319,13 +330,17 @@ def e17_bshade():
 						pyetun_bshade.set_trans_alg(value)
 						print bold("Done!")
 						e17_bshade()
+						break
+
 					else:
 						print bold("> Error: Value between 0 and 3")
 						e17_bshade()
+						break
 	
 				except ValueError:
 					print bold("> Error: Value between 0 and 3s")
 					e17_bshade()
+					break
 
 			elif opt=="s":
 				try:
@@ -333,14 +348,16 @@ def e17_bshade():
 					pyetun_bshade.set_shade_speed(value)
 					print bold("Done!")
 					e17_bshade()
+					break
 
 				except ValueError:
 					print bold("> Error: Value must be a valid number")
 					e17_bshade()
+					break
 			else:
 				print bold("> Error: m000 wrong option!")
 				e17_bshade()
-
+				break
 	except KeyboardInterrupt:
 		print "\nOops! exiting ;)"
 		console()
@@ -363,6 +380,7 @@ def e17_languages():
 		else:
 			current=current.split('"')[1]
 			print current
+			
 		
 		print bold_red("> Options: ")
 		print bold_green("[s]et language <language name>")
@@ -377,19 +395,22 @@ def e17_languages():
 			except:
 				print bold ("> Error: m00, wrong move! Try again..")
 				e17_languages()
+				break
 
 			if opt=="s":
 			
 				if value in all:  
 					pyetun_lang.set_lang(value) 
 					e17_languages()
+					break
 				else:
 					print bold("> Error: This language is not present. Check the list..")
 					e17_languages()
+					break
 			else:
 				print bold("> Error: m000 wrong option!")
 				e17_languages()
-
+				break
 	except KeyboardInterrupt:
 		print "\nOops! exiting ;)"
 		console()
@@ -447,7 +468,7 @@ def e17_winlist():
 			except:
 				print bold ("> Error: m00, wrong move! Try again..")
 				e17_winlist()
-			
+				break
 			
 			#try:
 				
@@ -461,32 +482,39 @@ def e17_winlist():
 					pyetun_winlist.set_list_other_desktops(value)
 					print bold("Done!")
 					e17_winlist()
+					break
+
 				else:
 					print bold("> Error: Value between 0 and 1")
 					e17_winlist()
+					break
 			
 			elif opt=="s":
 				if value>=0 and value<=1:
 					pyetun_winlist.set_show_iconified_windows(value)
 					print bold("Done!")
 					e17_winlist()
+					break
 
 				else:
 					print bold("> Error: Value between 0 and 1")
 					e17_winlist()
+					break
 			
 			elif opt=="j":
 				if value>=0 and value<=1:
 					pyetun_winlist.set_jump_desk(value)
 					print bold("Done!")
 					e17_winlist()
+					break
 				else:
 					print bold("> Error: Value between 0 and 1")
 					e17_winlist()
+					break
 			else:
 				print bold("> Error: m000 wrong option!")
 				e17_winlist()
-			
+				break
 
 	except KeyboardInterrupt:
 		print "\nOops! exiting ;)"
@@ -520,6 +548,7 @@ def e17_cache():
 			except:
 				print bold ("> Error: m00, wrong move! Try again..")
 				e17_cache()
+				break
 			
 			if opt=="f":
 				try:
@@ -527,9 +556,11 @@ def e17_cache():
 					pyetun_cache.set_font_cache(value)
 					print bold("Done!")
 					e17_cache()
+					break
 				except ValueError:
 					print bold("> Error: Value must be a valid number")
 					e17_cache()
+					break
 	
 			elif opt=="i":
 				try:
@@ -537,14 +568,15 @@ def e17_cache():
 					pyetun_cache.set_image_cache(value)
 					print bold("Done!")
 					e17_cache()
+					break
 		 	 	except ValueError:
 					print bold("> Error: Value must be a valid number")
 					e17_cache()
-
+					break
 			else:
 				print bold("> Error: m000 wrong option!")
 				e17_cache()
-
+				break
 		 
 	except KeyboardInterrupt:
 		print "\nOops! exiting ;)"
@@ -592,6 +624,7 @@ def e17_kill():
 			except:
 				print bold ("> Error: m00, wrong move! Try again..")
 				e17_kill()
+				break
 			
 			
 			
@@ -601,30 +634,31 @@ def e17_kill():
 					pyetun_kill.set_kill_close_not_possible(value)
 					print bold("Done!")
 					e17_kill()
+					break
 				else:
 					print bold("> Error: Value between 0 and 1")
 					e17_kill()
-			
+					break
 			elif opt=="e":
 				if value>=0 and value<=1:
 					pyetun_kill.set_kill_process(value)
 					print bold("Done!")
 					e17_kill()
-			
+					break
 				else:
 					print bold("> Error: Value between 0 and 1")
 					e17_kill()
-
-
+					break
+	
 			elif opt=="s":
 				pyetun_kill.set_kill_timer_wait(value)
 				print bold("Done!")
 				e17_kill()
-
+				break
 			else:
 				print bold("> Error: m000 wrong option!")
 				e17_kill()
-			
+				break
 
 	except KeyboardInterrupt:
 		print "\nOops! exiting ;)"
@@ -683,7 +717,7 @@ def e17_keys():
 					else:
 						print bold("> Error: modifier not valid. Only: CTRL, ALT, SHIFT!")
 						e17_keys()
-				
+						break
 				
 				else:
 					mod, key_final=key.split("+",1)
@@ -697,7 +731,7 @@ def e17_keys():
 				
 				print bold ("> Error: m00, wrong move! Try again..")
 				e17_keys()
-			
+				break
 			
 			
 			if opt=="a":
@@ -710,6 +744,7 @@ def e17_keys():
 				print key, "ADDED!"
 
 				e17_keys()
+				break
 
 			elif opt=="d":
 				
@@ -724,28 +759,32 @@ def e17_keys():
 					for inde, i in enumerate(keys):
 						
 						if modu[inde] == mod2 and keys[inde]==key_final2:
+							
 							action=act[inde]
 							param=par[inde]
 							ok=True
 							break
 		
 						else:
+							
 							ok=False
-
+				else:
+					ok=False
 					
 				if ok==True:		
 					pyetun_keys.del_key(key_final,mod,action,param)
 					print bold("KEY:"),
 					print key, "DELETED!"
 					e17_keys()
-					
+					break
 				else:
 					print bold("> Error: Invalid keybinding!")
 					e17_keys()
-			
+					break
 			else:
 				print bold("> Error: m000 wrong option!")
 				e17_keys()
+				break
 
 	except KeyboardInterrupt:
 		print "\nOops! exiting ;)"
@@ -794,56 +833,77 @@ def e17_focus():
 			except:
 				print bold ("> Error: m00, wrong move! Try again..")
 				e17_focus()
+				break
 			
 			#value=float(value)
 			
 			if opt=="f":
 				pol=["MOUSE","CLICK","SLOPPY"]
-				if value in pol:
-					pyetun_focus.set_focus(value)
+				
+				if value.upper() in pol:
+					pyetun_focus.set_focus(value.upper())
 					print bold("Done!")
 					e17_focus()
+					break
 				else:
 					print "[error]: Value is not correct!"
+					
+					e17_focus()
+					break
 			elif opt=="s":
 				set=["NONE", "NEW_WINDOWS", "NEW_DIALOG","NEW_DIALOG_IF_OWNER_FOCUSED"]
-				if value in set:
-					pyetun_focus.set_setting(value)
+				
+				if value.upper() in set:
+					pyetun_focus.set_setting(value.upper())
 					print bold("Done!")
 					e17_focus()
+					break
+
 				else:
 					print "[error]: Value is not correct!"
+					e17_focus()
+					break
 			elif opt=="r":
 				try:
 					value=int(value)
 				except ValueError:
 					print bold("> Error: Value between 0 and 1")
 					e17_focus()
+					break
 
 				if value>=0 and value<=1:
 					pyetun_focus.set_last_focused(value)
 					print bold("Done!")
 					e17_focus()
+					break
+
 				else:
 					print bold("> Error: Value between 0 and 1")
 					e17_focus()
+					break
+
 			elif opt=="o":
 				try:
 					value=int(value)
 				except ValueError:
 					print bold("> Error: Value between 0 and 1")
 					e17_focus()
+					break
 
 				if value>=0 and value<=1:
 					pyetun_focus.set_revert(value)
 					print bold("Done!")
 					e17_focus()
+					break
+
 				else:
 					print bold("> Error: Value between 0 and 1")
 					e17_focus()
+					break
 			else:
 				print bold("> Error: m000 wrong option!")
 				e17_focus()
+				break
 
 		
 	except KeyboardInterrupt:
@@ -883,7 +943,7 @@ def e17_font():
 				print bold ("> Error: m00, wrong move! Try again..")
 				
 				e17_font()
-			
+				break
 			#value=float(value)
 			
 			if opt=="d":
@@ -893,7 +953,7 @@ def e17_font():
 					print bold("> Error: Size must be an integer..")
 					enter()
 					e17_font()
-				
+					break
 	
 				if f_name in fonts: 
 					pyetun_font.set_font_default(t_class,f_name,size)
@@ -903,16 +963,16 @@ def e17_font():
 					pyetun_font.apply_font()
 					enter()
 					e17_font()
-
+					break
 					
 				else:
 					print bold("> Error: Font not available! Please check available fonts..")
 					e17_font()
-
+					break
 			else:
 				print bold("> Error: m000 wrong option!")
 				e17_font()
-	
+				break
 	except KeyboardInterrupt:
 		print "\nOops! exiting ;)"
 		console()
