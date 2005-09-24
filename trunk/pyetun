@@ -869,7 +869,7 @@ def e17_focus():
 					e17_focus()
 					break
 			elif opt=="s":
-				set=["NONE", "NEW_WINDOWS", "NEW_DIALOG","NEW_DIALOG_IF_OWNER_FOCUSED"]
+				set=["NONE", "NEW_WINDOW", "NEW_DIALOG","NEW_DIALOG_IF_OWNER_FOCUSED"]
 				
 				if value.upper() in set:
 					pyetun_focus.set_setting(value.upper())
