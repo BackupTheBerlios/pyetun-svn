@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os, sys
-
+Version="0.3"
 
 # Config file Object return
 
@@ -9,6 +9,7 @@ def check_enligh_remote():
 	try:
 		import pyetun_cfg
 		e_path=pyetun_cfg.return_remote()
+		
 		if not os.path.exists(e_path):
 			print "[error] enlightenment_remote NOT found in:",e_path,".Check pyetun.conf and set correct path!"
 			print "* Exiting.."
@@ -23,8 +24,10 @@ def check_enligh_remote():
 
 def console():
 	try:
+		print "\n* Enlightenment DR17 tunner - version: ",
+		print bold_green(Version),
+		print " *"
 		print """
-* Python E17 tunner - PYETUN * 
 1 ) E17 modules
 2 ) Desktop names
 3 ) Border shade options
@@ -33,7 +36,7 @@ def console():
 6 ) E17 cache (font and image)
 7 ) Windows kill options
 8 ) Keybindings 
-9 ) Windows Focus Settings
+9 ) Windows Focus/Maximize Settings
 10) Font Settings
 11) Virtual Desktops 
 0 ) Exit
@@ -311,6 +314,7 @@ def e17_bshade():
 
 			if opt=="b":
 				try:
+
 					value=int(value)
 					if value>=0 and value<=1:
 						pyetun_bshade.set_bshade(value)
@@ -801,6 +805,7 @@ def e17_focus():
 		setting=pyetun_focus.get_setting()[:-1]
 		last=pyetun_focus.get_last_focused()[:-1]
 		revert=pyetun_focus.get_revert()[:-1]
+		maxi_policy=pyetun_focus.get_maximize()
 		
 		print "> Focus settings:"
 		print bold_yellow("=> "),
@@ -822,11 +827,20 @@ def e17_focus():
 			print bold_yellow("=> "),
 			print "Focus the last focused window when you hide or close a focused window: DISABLED(0)"
 		
+
+		print "\n> Maximize settings:"
+		print bold_yellow("=> "),
+		print "Maximize Windows Policy: ",maxi_policy
+
 		print bold_red("> Options: ")
+		print "> Focus options:"
 		print bold_green("[f]ocus policy <MOUSE, CLICK or SLOPPY>") 
 		print bold_green("[s]etting focus policy <NONE, NEW_WINDOWS, NEW_DIALOG or NEW_DIALOG_IF_OWNER_FOCUSED>")
 		print bold_green("[r]emember focused windows when switching desktops <0/1>")
 		print bold_green("f[o]cus the last focused windows when you hide or close a focused window <0/1>")
+		print "\n> Maximize options:"
+		print bold_green("[m]aximize policy <FULLSCREEN, SMART, EXPAND or FILL>")
+
 		print "> CTRL+C - Main Menu"
 		valu=raw_input("Option: ")
 		while 1:
@@ -850,7 +864,7 @@ def e17_focus():
 					e17_focus()
 					break
 				else:
-					print "[error]: Value is not correct!"
+					print bold("> Error: Wrong value..")
 					
 					e17_focus()
 					break
@@ -864,7 +878,7 @@ def e17_focus():
 					break
 
 				else:
-					print "[error]: Value is not correct!"
+					print bold("> Error: Wrong value..")
 					e17_focus()
 					break
 			elif opt=="r":
@@ -902,6 +916,21 @@ def e17_focus():
 
 				else:
 					print bold("> Error: Value between 0 and 1")
+					e17_focus()
+					break
+
+			elif opt=="m":
+
+				max_list=["FULLSCREEN","SMART","EXPAND","FILL"]
+				
+				if value.upper() in max_list:
+					pyetun_focus.set_maximize(value.upper())
+					print bold("Done!")
+					e17_focus()
+					break
+				else:
+					print bold ("> Error: Wrong value..")
+					
 					e17_focus()
 					break
 			else:
