@@ -35,6 +35,7 @@ def console():
 8 ) Keybindings 
 9 ) Windows Focus Settings
 10) Font Settings
+11) Virtual Desktops 
 0 ) Exit
 """
 		rsp = raw_input ("Option: ")
@@ -58,6 +59,9 @@ def console():
 			e17_focus()
 		elif rsp=="10":
 			e17_font()
+		elif rsp=="11":
+			e17_edge()
+
 		elif rsp =="0":
 			print "Thanks for using E17 tunner. You're now a rice boy.. ;)\n"
 			sys.exit()
@@ -977,7 +981,86 @@ def e17_font():
 		print "\nOops! exiting ;)"
 		console()
 
+def e17_edge():
+	try:
+		import pyetun_edge
+		print bold( "> Switch between desktops options:")
+		flip=pyetun_edge.get_edge()
+		timeout=pyetun_edge.get_edge_timeout()
+		print bold_yellow("=> "),
+		if flip=="1":
+			print "Switch between desktops when moving mouse: ENABLED (1)"
+		elif flip=="0":
+			print "Switch between desktops when moving mouse: DISABLED (0)"
 
+		
+		print bold_yellow("=> "),
+		print "Time between the switch of virtual desktops:", 
+		print timeout+" sec"
+
+		print bold_red("> Options: ")
+		print bold_green("[s]witch between desktops when moving mouse <0/1>")
+		print bold_green("[t]ime between the switch of virtual desktops: <time in sec>")
+		valu=raw_input("Option: ")
+		
+		while 1:
+			try:
+				t=valu.split(" ")
+				opt=t[0]
+				value=t[1]
+			except:
+				print bold ("> Error: m00, wrong move! Try again..")
+				
+				e17_edge()
+				break
+
+			if opt=="s":
+
+				try:
+					value=int(value)
+				except ValueError:
+					print bold("> Error: Value between 0 and 1")
+					e17_edge()
+					break
+
+				if value>=0 and value<=1:
+					pyetun_edge.set_edge(value)
+					print bold("Done!")
+					e17_edge()
+					break
+
+				else:
+					print bold("> Error: Value between 0 and 1")
+					e17_edge()
+					break
+				
+			elif opt=="t":
+
+				try:
+					value=float(value)
+					if value>=0 and value<=2:
+						pyetun_edge.set_edge_timeout(value)
+						print bold("Done!")
+						e17_edge()
+						break
+					else:
+						print bold("> Error: Value between 0 sec and 2 sec")
+						e17_edge()
+						break
+				except ValueError:
+					print bold("> Error: Time must be a float/integer")
+					e17_edge()
+					break
+
+			else:
+				print bold("> Error: m000 wrong option!")
+				e17_edge()
+				break
+			
+	except KeyboardInterrupt:
+		print "\nOops! exiting ;)"
+		console()
+	
 def enter():
 	raw_input("> Press Enter to continue..")
 
