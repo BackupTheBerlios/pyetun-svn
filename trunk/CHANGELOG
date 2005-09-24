@@ -17,3 +17,9 @@ PYETUN - Changelog ;)
 	- Bug on Winlist option "s".
 	- Now all works in pyetun (i hope..)
 	
+
+* 0.3:
+	- Infinite loop in Focus Settings (f click) - Thanks to entropie.
+	- Invalid keybinding fix - Thanks (again) to entropie.
+	- Minor bugs fix.
+	- Virtual Desktops feature added! 
