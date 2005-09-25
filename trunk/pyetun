@@ -21,6 +21,7 @@ def check_enligh_remote():
 	except KeyboardInterrupt:
 		print "Thanks for using E17 tunner. You're now a rice boy.. ;)\n"
 		sys.exit()
+	
 
 def console():
 	try:
@@ -71,6 +72,9 @@ def console():
 	
 	except KeyboardInterrupt:
 		print "Thanks for using E17 tunner. You're now a rice boy.. ;)\n"
+		sys.exit()
+	except EOFError:
+		print "\n> Exiting.."
 		sys.exit()
 
 def bold(s): 
@@ -1025,23 +1029,27 @@ def enter():
 	raw_input("> Press Enter to continue..")
 
 # MAIN FUNCTIONS :)
-if len(sys.argv)==2:
-	if sys.argv[1] == "autoconf":
-		try:
-			import pyetun_cfg
-			print "> Autogenerating pyetun.conf..",
-			pyetun_cfg.set_er_path()
-			pyetun_cfg.set_modules_path()
-			print "Done"
-			print "NOTE: Please check your config file!"
+def main():
+	if len(sys.argv)==2:
+		if sys.argv[1] == "autoconf":
+			try:
+				import pyetun_cfg
+				print "> Autogenerating pyetun.conf..",
+				pyetun_cfg.set_er_path()
+				pyetun_cfg.set_modules_path()
+				print "Done"
+				print "NOTE: Please check your config file!"
 		
 
-		except KeyboardInterrupt:
-			print "\nOops! exiting ;)"
-			sys.exit()
+			except KeyboardInterrupt:
+				print "\nOops! exiting ;)"
+				sys.exit()
+		else:
+			print "> Wrong Option. Available options: autoconf"
 	else:
-		print "> Wrong Option. Available options: autoconf"
-else:
-	check_enligh_remote()
-	console()
+		check_enligh_remote()
+		console()
+
+# MAIN
+main()
 	
