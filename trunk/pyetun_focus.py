@@ -1,6 +1,9 @@
 import os, sys, pyetun_cfg
 e_remote_path=pyetun_cfg.return_remote()
 
+
+#TO BE RENAMED TO PYETUN_WINDOWS .....
+
 def get_focus():
 	fc=os.popen(e_remote_path+" -focus-policy-get").readlines()
 	del fc[0]
@@ -62,4 +65,13 @@ def get_maximize():
 
 def set_maximize(value):
 	os.popen(e_remote_path+" -maximize-policy-set "+value)
-	
+
+def get_placement_policy():
+	pla=os.popen(e_remote_path+" -window-placement-policy-get").readlines()
+	del pla[0]
+	pla=pla[:-1]
+	pla=pla[0].split(" ")[1][:-1] #python rocks
+	return pla
+
+def set_placement_policy(value):
+	os.popen(e_remote_path+" -window-placement-policy-set "+value)

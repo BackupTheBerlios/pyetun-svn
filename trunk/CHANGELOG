@@ -26,5 +26,6 @@ PYETUN - Changelog ;)
 	- Minor bugs fix.
 
 	- Virtual Desktops feature added! 
-	- Maximize policy added in option 9. Focus/Maximize options in main menu
-	- pyetun autoconf - Searchs system for correct paths and set it to pyetun.conf (Thanks to mopatop for the tip)
+	- Maximize policy added in option 9 (Windows Settings).
+	- Window Placement added in option 9 (Windows Settings).
+	- pyetun autoconf - Searchs system for correct paths and set it to pyetun.conf (Thanks to mopatop for the tip).
