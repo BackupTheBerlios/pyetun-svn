@@ -21,6 +21,10 @@ PYETUN - Changelog ;)
 * 0.3:
 	- Infinite loop in Focus Settings (f click) - Thanks to entropie.
 	- Invalid keybinding fix - Thanks (again) to entropie.
+	- Bug in Focus Settings, option "s", replaced NEW_WINDOWS with NEW_WINDOW. thanks to doy.
+	- Recursivity FIX - Important reduce of memory/cpu usage (can result in a faster execution..)
 	- Minor bugs fix.
+
 	- Virtual Desktops feature added! 
 	- Maximize policy added in option 9. Focus/Maximize options in main menu
+	- pyetun autoconf - Searchs system for correct paths and set it to pyetun.conf (Thanks to mopatop for the tip)

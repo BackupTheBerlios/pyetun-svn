@@ -11,14 +11,20 @@ As root:
 Run with:
 * pyetun ( or /usr/bin/pyetun )
 
-Note: Edit pyetun.conf to fit your needs ;)
+Note: Edit pyetun.conf to fit your needs or run as root pyetun autoconf.
 Enjoy.
 
 -------------------------------------------
 Configuration: pyetun.conf
 ------------------------------------------
 
-* There's a file with configuration options: pyetun.conf
+############ AUTO CONFIGURATION ########################
+As root:
+* pyetun autoconf
+
+########## MANUAL CONFIGURATION ########################
+
+* There's a file with configuration options: /etc/pyetun.conf
 
 * You can change your enlightenment_remote path, if you dont know where is it, use "whereis enlightenment_remote" or "find -name / enlightenment_remote".
 
