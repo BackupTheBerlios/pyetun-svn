@@ -665,7 +665,7 @@ def e17_keys():
 					mod1, mod2, key_final=key.split("+",2)
 					modifier1=mod1.upper()
 					modifier2=mod2.upper()
-					key_final=key_final.upper()
+					#key_final=key_final.upper()
 
 					if modifier1 in all_mod and modifier2 in all_mod:
 			
@@ -707,10 +707,12 @@ def e17_keys():
 			
 
 				key_final2='"'+key_final+'"'
-				key_final2=key_final2.upper()
+				#key_final2=key_final2.upper()
 				mod2=mod.split('"')[1]
 				
-				#print mod
+				
+				print "KEY FINAL2", key_final2
+				print "KEYS", keys
 				if key_final2 in keys and mod2 in modu:
 			
 					for inde, i in enumerate(keys):
